@@ -63,6 +63,7 @@ a .pro-list:hover{
 
 .pro-img img{
     width:120px;
+    height: 80px;
 }
 h2.pro-name{
     margin: 0;
