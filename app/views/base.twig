@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>宁波美天诚品进出口有限公司</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {% block nav_title %}<a class="navbar-brand" href="{{ path('home') }}">美天诚品</a>{% endblock %}
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="{{ path('home') }}">首 页</a></li>
+                {#<li><a href="help.html">帮助中心</a></li>#}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">产品中心 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('products', {cate: 17}) }}">生活用品</a></li>
+                        <li><a href="{{ path('products', {cate: 20}) }}">进口食品</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户中心 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('login') }}">亲,请登录</a></li>
+                        <li><a href="{{ path('register') }}">免费注册</a></li>
+                        <li><a href="{{ path('customer_my_orders') }}">我的订单</a></li>
+                        <li><a href="{{ path('cart') }}">购物车</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+
+    {% block main %}
+    {% endblock %}
+
+</div>
+<!--wrapper end-->
+
+
+<script src="/js/jquery-1.11.0.min.js"></script>
+<script src="/css/bootstrap/js/bootstrap.js"></script>
+{% block end_js %}
+{% endblock %}
+</body>
+</html>

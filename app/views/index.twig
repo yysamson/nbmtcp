@@ -1,0 +1,53 @@
+{% extends "base.twig" %}
+{% import "macro/goods_list.twig" as goods_list %}
+{% block main %}
+    <div class="main">
+        <div id="carousel-example-generic" class="carousel slide focus" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/images/7.jpg" alt="宁波美天诚品进出口有限公司">
+                </div>
+                <div class="item">
+                    <img src="/images/10.jpg" alt="宁波美天诚品进出口有限公司">
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+
+        <div class="linkbutton">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a href="{{ path('products', {cate: 17}) }}"><img src="/images/shyp.jpg" alt="生活用品" class="img-thumbnail"></a>
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="{{ path('products', {cate: 20}) }}"><img src="/images/sp.jpg" alt="食品" class="img-thumbnail"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="products">
+            {{ goods_list.goods_list(goods) }}
+        </div>
+        <!--products end-->
+        <!--<div class="load">-->
+        <!--<div class="container">-->
+        <!--<button type="button" class="btn btn-primary btn-lg btn-block">加载更多</button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+    </div>  <!--main end-->
+{% endblock %}

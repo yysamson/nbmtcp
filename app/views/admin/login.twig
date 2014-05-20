@@ -1,0 +1,45 @@
+{#{% extends "admin/base.twig" %}#}
+{#{% block main %}#}
+    {#<p>账号：admin，密码：foo</p>#}
+    {#<form action="{{ path('admin_login_check') }}" method="post">#}
+        {#{{ error }}#}
+        {#<input type="text" name="_username" value="{{ last_username }}"/>#}
+        {#<input type="password" name="_password" value=""/>#}
+        {#<input type="checkbox" id="remember_me" name="_remember_me" checked />#}
+        {#<label for="remember_me">保持登录</label>#}
+        {#<input type="submit"/>#}
+    {#</form>#}
+{#{% endblock %}#}
+{% extends "base.twig" %}
+{% block main %}
+    <div class="main">
+        <form class="form-horizontal" role="form" action="{{ path('admin_login_check') }}" method="post">
+            <div class="container">
+                {{ error }}
+                <div class=" form-group1">
+                    <label for="inputusername3" class=" control-label">用户名</label>
+                    <input type="text" class="form-control " id="inputusername3" placeholder="请输入用户名" name="_username" value="{{ last_username }}">
+
+                </div>
+                <div class=" form-group1">
+                    <label for="inputPassword3" class="control-label">密码</label>
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="请输入用户名" name="_password" value="">
+
+                </div>
+                <div class="form-group1">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input type="submit" class="btn btn-danger btn-lg btn-block" value="登录">
+                        </div>
+                        <div>
+                            <div class="col-xs-6">
+                                <a href="a"  class="btn btn-default btn-lg btn-block">注册</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>  <!--main end-->
+{% endblock %}

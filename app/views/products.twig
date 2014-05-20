@@ -1,0 +1,44 @@
+{% extends "base.twig" %}
+{% import "macro/goods_list.twig" as goods_list %}
+{% block nav_title %}
+    <a class="navbar-brand" href="{{ path('home') }}"><span class="glyphicon glyphicon-chevron-left return1"></span>{{ cate_name }}</a>
+{% endblock %}
+{% block main %}
+    <input type="hidden" id="cate" value="{{ cate }}"/>
+    <input type="hidden" id="page" value="1"/>
+    <div class="main">
+        <div id="products" class="products">
+            {{ render(url('list_block', {cate: cate})) }}
+        </div>
+        <!--products end-->
+        <div class="load">
+            <div class="container">
+                <button id="load-more" type="button" class="btn btn-primary btn-lg btn-block">加载更多</button>
+            </div>
+        </div>
+    </div>  <!--main end-->
+{% endblock %}
+{% block end_js %}
+    <script>
+        $('#load-more').on('click', function () {
+            if (!($(this).hasClass('disabled'))) {
+                $(this).addClass('disabled');
+                $(this).text('加载中');
+                var page = parseInt($('#page').val()) + 1;
+                $.get('/list_block/{{ cate }}/_' + page, function (data) {
+                    if (data.replace(/\s/g, "")) {
+                        $('#products').append(data);
+                        $('#load-more')
+                                .removeClass('disabled')
+                                .text('加载更多');
+                        $('#page').val(page);
+                    } else {
+                        $('#load-more')
+                                .text('没有更多');
+                    }
+                });
+            }
+        });
+
+    </script>
+{% endblock %}

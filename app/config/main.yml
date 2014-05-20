@@ -1,0 +1,22 @@
+providers:
+    service_controller: true
+    url_generator: true
+    session: true
+    validator: true
+    form: true
+    translation: true
+    http_cache: true
+    serializer: false
+    mail: false
+    doctrine: false
+    security: true
+    remember_me: true
+    twig: true
+    http_fragment: true
+
+user_providers:
+    - '\Provider\ExtensionServiceProvider'
+
+wechat_pay:
+    app_id: wx5e07541dfbc5ee59
+    app_secret: e0e0b3b63a4a4d1b05be002a99951a64

@@ -1,0 +1,7 @@
+customer_index:
+    path: /customer
+    defaults: { _controller: '\Controller\Customer\DefaultController::indexAction' }
+
+customer_my_orders:
+    path: /customer/orders
+    defaults: { _controller: '\Controller\Customer\DefaultController::myOrdersAction' }

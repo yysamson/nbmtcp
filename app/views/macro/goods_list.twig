@@ -1,0 +1,21 @@
+{% macro goods_list(goods_array) %}
+    {% for goods in goods_array %}
+    <a href="{{ path('goods', {id: goods.id}) }}">
+
+            <div class="pro-list">
+                <div class="container">
+                    <div class="pro-xx">
+                        <div class="pro-img"><img src="{{ goods.image|default('/images/default-pro.jpg') }}"></div>
+                        <div class="pro-info">
+                            <h2 class="pro-name">{{ goods.name }}</h2>
+
+                            <div class="price-info">
+                                <h3 class="price">￥<span class="bigprice">{{ goods.price|number_format(2) }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </a>{% endfor %}
+{% endmacro %}

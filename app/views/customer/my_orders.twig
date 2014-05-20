@@ -1,0 +1,70 @@
+{% extends "base.twig" %}
+{% block nav_title %}
+    <a class="navbar-brand" href="{{ path('home') }}"><span
+                class="glyphicon glyphicon-chevron-left return1"></span>我的订单</a>
+{% endblock %}
+{% block main %}
+    <div class="main">
+        <div class="products">
+            <div class="container order-bt">
+                <div class="row">
+                    <div class="col-xs-12 ">
+                        <P class="pull-right month"><span class="glyphicon glyphicon-star return1"></span>最近10个订单</P>
+                    </div>
+                </div>
+            </div>
+            {% for o in orders %}
+                <div class="container">
+                    <div class="order-list">
+                        <div class="order">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <small>订单编号：{{ o.id }}</small>
+                                </div>
+                                <div class="col-xs-6">
+                                    <small class="pull-right">成交时间：{{ o.created|date('Y-m-d') }}</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pro-list1">
+                            {% set items = o(o, 'ordersitem') %}
+                            {% for i in items %}
+                                {% set goods = p(i, 'goods') %}
+                                <a href="#">
+                                    <div class="pro-xx1">
+                                        <div class="pro-img"><img src="{{ goods.image|default('/images/default-pro.jpg') }}"></div>
+                                        <div class="pro-info">
+                                            <h2 class="pro-name">{{ goods.name }}</h2>
+
+                                            <div class="price-info">
+                                                <h3 class="price price-nocol">￥<span class="bigprice">{{ i.price|number_format(2) }}</span></h3>
+                                                <span class="buy-count">共{{ i.amount }}件</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                    <!--pro-list end-->
+                    <div class="count1">
+
+                        <div class="row">
+                            <div class="col-xs-6 ">
+                                订单总金额：<span class="col-red">￥{{ o.price|number_format(2) }}</span>
+                            </div>
+                            <div class="col-xs-6">
+                                <small class="pull-right">订单状态：<span class="shipped">{{ o.status }}</span>{% if o.status == '未支付' %}
+                                    <a href="{{ path('wechat_pay', {id: o.id}) }}" class="btn btn-xs btn-danger">立即支付</a>{% endif %}</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!--products end-->
+    </div>  <!--main end-->
+{% endblock %}

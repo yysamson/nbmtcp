@@ -1,0 +1,19 @@
+admin_category:
+    path: /admin/category
+    defaults: { _controller: '\Controller\Admin\CategoryController::indexAction' }
+
+admin_category_add:
+    path: /admin/category/add
+    defaults: { _controller: '\Controller\Admin\CategoryController::addJsonAction' }
+
+admin_category_move:
+    path: /admin/category/move
+    defaults: { _controller: '\Controller\Admin\CategoryController::moveJsonAction' }
+
+admin_category_rename:
+    path: /admin/category/rename
+    defaults: { _controller: '\Controller\Admin\CategoryController::renameJsonAction' }
+
+admin_category_delete:
+    path: /admin/category/delete
+    defaults: { _controller: '\Controller\Admin\CategoryController::deleteJsonAction' }

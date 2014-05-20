@@ -1,0 +1,11 @@
+admin_index:
+    path: /admin
+    defaults: { _controller: '\Controller\Admin\DefaultController::indexAction' }
+
+admin_login:
+    path: /a_login
+    defaults: { _controller: '\Controller\Admin\DefaultController::loginAction' }
+
+admin_ck_upload:
+    path: /admin/ck_upload
+    defaults: { _controller: '\Controller\Admin\DefaultController::ckUploadAction' }

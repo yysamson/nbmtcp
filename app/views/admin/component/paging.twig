@@ -1,0 +1,23 @@
+{% macro paging(count, pages, page, route) %}
+    {% set page = page|default(1) %}
+    <div class="ui" style="text-align: right">
+        <div class="ui pagination menu">
+            <a class="icon item">
+                共 {{ count }} 条，{{ page }}/{{ pages }} 页
+            </a>
+            {% if page > 1 %}
+                <a class="icon item" href="{{ path(route) }}">
+                    <i class="icon backward"></i>
+                </a>
+                <a class="icon item" href="{{ path(route, {'page': page-1}) }}">
+                    <i class="icon left arrow"></i>
+                </a>
+            {% endif %}
+            {% if page < pages %}
+                <a class="icon item" href="{{ path(route, {'page': page+1}) }}">
+                    <i class="icon right arrow"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}

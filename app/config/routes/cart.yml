@@ -1,0 +1,19 @@
+cart:
+    path: /cart
+    defaults: { _controller: '\Controller\CartController::indexAction'}
+
+cart_add:
+    path: /cart/add
+    defaults: { _controller: '\Controller\CartController::addAction'}
+
+cart_update:
+    path: /cart/update
+    defaults: { _controller: '\Controller\CartController::updateAction'}
+
+cart_delete:
+    path: /cart/delete/{gid}
+    defaults: { _controller: '\Controller\CartController::deleteAction'}
+
+cart_order:
+    path: /customer/order
+    defaults: { _controller: '\Controller\CartController::orderAction'}

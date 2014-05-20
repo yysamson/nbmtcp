@@ -1,0 +1,9 @@
+{% extends "admin/base.twig" %}
+{% form_theme form 'Form/div_layout.html.twig' %}
+{% block main %}
+    <h1>编辑商品</h1>
+    <form class="ui form segment" action="{{ path('admin_goods_update', {id: id}) }}" method="post">
+        {{ form_widget(form) }}
+        <input class="ui green submit button" type="submit" name="submit" value="确定" />
+    </form>
+{% endblock %}

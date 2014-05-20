@@ -1,0 +1,69 @@
+{% extends "base.twig" %}
+{% block main %}
+    <div class="main">
+        <form class="form-horizontal" role="form" method="post" action="{{ path('register') }}">
+            <div class="container">
+                {% if errors %}
+                    <ul>
+                        {% for e in errors %}
+                            <li>{{ e }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div class=" form-group1">
+                    <label class=" control-label">用户名</label>
+                    <input type="text" class="form-control " placeholder="请输入用户名" name="username"
+                           value="{{ data.username }}" required>
+
+                </div>
+                <div class=" form-group1">
+                    <label class="control-label">密码</label>
+                    <input type="password" class="form-control" placeholder="请输入密码" name="password" required>
+
+                </div>
+                <div class=" form-group1">
+                    <label class="control-label">核对密码</label>
+                    <input type="password" class="form-control" placeholder="请再一次输入密码" name="password1" required>
+
+                </div>
+                <div class="form-group1">
+                    <label class="control-label">真实姓名</label>
+                    <input type="text" class="form-control" placeholder="请输入真实姓名" name="name" value="{{ data.name }}"
+                           required>
+                </div>
+                <div class="form-group1">
+                    <label class="control-label">联系电话</label>
+                    <input type="number" class="form-control" placeholder="请输入联系电话" name="tel" value="{{ data.tel }}"
+                           required>
+                </div>
+                <div class="form-group1">
+                    <label class=" control-label">邮箱地址</label>
+                    <input type="email" class="form-control" placeholder="请输入邮箱地址" name="email" value="{{ data.email }}"
+                           required>
+                </div>
+                <div class="form-group1">
+                    <label class="control-label">收货地址</label>
+                    <input type="text" class="form-control" placeholder="请输入收货地址" name="address" value="address"
+                           required>
+                </div>
+
+                <div class="form-group1">
+                    <div class=" ">
+                        <input type="submit" id="submit" class="btn btn-danger btn-lg btn-block" value="我要注册">
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>  <!--main end-->
+{% endblock %}
+{% block end_js %}
+    <script>
+        $('form').on('submit', function(){
+           if($('input[name=password]').val() != $('input[name=password1]').val()){
+               alert('密码不匹配');
+               return false;
+           }
+        });
+    </script>
+{% endblock %}

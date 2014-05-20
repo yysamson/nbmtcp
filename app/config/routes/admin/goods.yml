@@ -1,0 +1,33 @@
+admin_goods:
+    path: /admin/goods/_{page}
+    defaults: { _controller: '\Controller\Admin\GoodsController::indexAction', page: 1 }
+
+admin_goods_show:
+    path: /admin/goods/{id}
+    defaults: { _controller: '\Controller\Admin\GoodsController::showAction' }
+    requirements:
+        id:  \d+
+
+admin_goods_add:
+    path: /admin/goods/add
+    defaults: { _controller: '\Controller\Admin\GoodsController::addAction' }
+
+admin_goods_update:
+    path: /admin/goods/update/{id}
+    defaults: { _controller: '\Controller\Admin\GoodsController::updateAction' }
+
+admin_goods_delete:
+    path: /admin/goods/delete/{id}
+    defaults: { _controller: '\Controller\Admin\GoodsController::deleteAction' }
+
+admin_goods_image_upload:
+    path: /admin/goods/image/upload
+    defaults: { _controller: '\Controller\Admin\GoodsController::imageUploadAction' }
+
+admin_goods_image_delete:
+    path: /admin/goods/image/delete/{id}
+    defaults: { _controller: '\Controller\Admin\GoodsController::imageDeleteAction' }
+
+admin_goods_default_image:
+    path: /admin/goods/default_image/{id}/{image_id}
+    defaults: { _controller: '\Controller\Admin\GoodsController::setDefaultImageAction' }

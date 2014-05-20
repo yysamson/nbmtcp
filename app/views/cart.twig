@@ -1,0 +1,85 @@
+{% extends "base.twig" %}
+{% block nav_title %}
+    <a class="navbar-brand" href="{{ path('home') }}"><span
+                class="glyphicon glyphicon-chevron-left return1"></span>购物车</a>
+{% endblock %}
+{% block main %}
+    <div class="main">
+        <div class="container ">
+            {% for i in items %}
+                <div class="cart">
+                    <div class="pro-list2">
+                        <a href="#">
+                            <div class="pro-xx">
+                                <div class="pro-img"><img src="{{ i.goods.image|default('/images/default-pro.jpg') }}"></div>
+                                <div class="pro-info">
+                                    <h2 class="pro-name">{{ i.goods.name }}</h2>
+
+                                    <div class="price-info">
+                                        单价：<span class="col-red">￥{{ i.goods.price|number_format(2) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    {#<div class="count">
+                        <div class="row ">
+                            <div class="pull-right">
+                                <div class="col-xs-1 pull-left">
+                                    <a class="glyphicon glyphicon-trash trash" href="{{ path('cart_delete', {gid: i.goods.id}) }}"></a>
+                                </div>
+
+                                <div class="col-xs-3 ">
+                                    <input class="nmu" type="number" placeholder="{{ i.amount }}">
+                                </div>
+                                <div class="col-xs-7 pull-right">
+                                    小计：<span class="col-red">￥{{ (i.goods.price * i.amount)|number_format(2) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>#}
+                    <div class=" count">
+                        <div class="row pull-left ">
+                            <div class="col-xs-1">
+                                <a class="glyphicon glyphicon-trash trash" href="{{ path('cart_delete', {gid: i.goods.id}) }}"></a>
+                            </div>
+
+                            <form class="col-xs-9" method="post" action="{{ path('cart_update') }}">
+                                <input class="nmu" type="number" name="amount" value="{{ i.amount }}">
+                                <input type="hidden" name="gid" value="{{ i.goods.id }}"/>
+                                <input type="submit" value="更新">
+                            </form>
+                        </div>
+                        <div class="row pull-right">
+                            <div class="col-xs-12">
+                                小计：<span class="col-red">￥{{ (i.goods.price * i.amount)|number_format(2) }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--cart end-->
+            {% endfor %}
+
+            <div class="settle">
+                <div class="count">
+                    <div class="row ">
+                        <div class="col-xs-9 check">
+                            合计：<span class="col-red">￥{{ cart.totalPrice|number_format(2) }}</span>
+                        </div>
+                        <div class="col-xs-3">
+                            <a href="" class="pull-right ">
+                                <a href="{{ path('cart_order') }}"  class="btn btn-danger">下订单</a>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--settle end-->
+
+
+        </div>
+    </div>  <!--main end-->
+{% endblock %}

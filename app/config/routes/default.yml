@@ -1,0 +1,27 @@
+home:
+    path: /
+    defaults: { _controller: '\Controller\DefaultController::indexAction'}
+
+products:
+    path: /products/{cate}
+    defaults: { _controller: '\Controller\DefaultController::productsAction'}
+
+list_block:
+    path: /list_block/{cate}/_{page}
+    defaults: { _controller: '\Controller\DefaultController::listBlockAction', page: 1}
+
+goods:
+    path: /goods/{id}
+    defaults: { _controller: '\Controller\DefaultController::goodsAction'}
+
+goods_introduction:
+    path: /goods/introduction/{id}
+    defaults: { _controller: '\Controller\DefaultController::goodsIntroductionAction'}
+
+login:
+    path: /login
+    defaults: { _controller: '\Controller\DefaultController::loginAction' }
+
+register:
+    path: /register
+    defaults: { _controller: '\Controller\DefaultController::registerAction' }

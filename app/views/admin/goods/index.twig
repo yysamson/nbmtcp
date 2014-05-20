@@ -1,0 +1,42 @@
+{% extends "admin/base.twig" %}
+{% import "admin/component/paging.twig" as paging %}
+{% block main %}
+    <h1>商品列表</h1>
+    <table class="ui table segment compact">
+        <thead>
+        <tr>
+            <th>图片</th>
+            <th>商品名称</th>
+            <th>价格</th>
+            <th>类别</th>
+            <th>状态</th>
+            <th>发布时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for g in goods.data %}
+            <tr>
+                <td><img style="height: 80px" src="{{ g.image }}" alt=""/></td>
+                <td>{{ g.name }}</td>
+                <td>￥{{ g.price|number_format(2) }}</td>
+                <td>{{ p(g, 'goodscategory').title }}</td>
+                <td>{{ g.available ? '上架' : '下架' }}</td>
+                <td>{{ g.created }}</td>
+                <td>
+                    <a class="small ui button" href="{{ path('admin_goods_show', {id: g.id}) }}" target="_blank">
+                        详情
+                    </a>
+                    <a class="small ui green button" href="{{ path('admin_goods_update', {id: g.id}) }}">
+                        修改
+                    </a>
+                    <a class="small ui red button delete" href="{{ path('admin_goods_delete', {id: g.id}) }}">
+                        删除
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ paging.paging(goods.count, goods.pages, page, 'admin_goods') }}
+{% endblock %}

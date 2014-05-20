@@ -1,0 +1,83 @@
+{% block form_start %}
+    {% spaceless %}
+        {% set method = method|upper %}
+        {% if method in ["GET", "POST"] %}
+            {% set form_method = method %}
+        {% else %}
+            {% set form_method = "POST" %}
+        {% endif %}
+        <form class="ui form segment" name="{{ form.vars.name }}"
+              method="{{ form_method|lower }}" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+        {% if form_method != method %}
+            <input type="hidden" name="_method" value="{{ method }}"/>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_start %}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        <div class="ui left labeled input">
+            <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="field">
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block button_widget %}
+    {% spaceless %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <button class="ui blue submit button"
+                type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
+    {% endspaceless %}
+{% endblock button_widget %}
+
+{% block html_widget %}
+    {% spaceless %}
+        {{ block('textarea_widget') }}
+        <script>
+            CKEDITOR.replace("{{ full_name }}");
+        </script>
+    {% endspaceless %}
+{% endblock html_widget %}
+
+{% block choice_widget_collapsed %}
+    {% spaceless %}
+        {#{% if required and empty_value is none and not empty_value_in_choices and not multiple %}#}
+            {#{% set required = false %}#}
+        {#{% endif %}#}
+        <div class="ui selection dropdown">
+            <input {{ block('widget_attributes') }} type="hidden" value="{{ value }}">
+
+            <div class="default text">请选择</div>
+            <i class="dropdown icon"></i>
+
+            <div class="menu">
+                {% set options = choices %}
+                {% for group_label, choice in options %}
+                    <div class="item" data-value="{{ choice.value }}">{{ choice.label|trans({}, translation_domain) }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block checkbox_widget %}
+    {% spaceless %}
+        <div class="ui slider checkbox">
+            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+            <label></label>
+        </div>
+    {% endspaceless %}
+{% endblock checkbox_widget %}

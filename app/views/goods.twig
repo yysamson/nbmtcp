@@ -1,0 +1,111 @@
+{% extends "base.twig" %}
+{% block nav_title %}
+    <a class="navbar-brand" href="{{ path('home') }}"><span
+                class="glyphicon glyphicon-chevron-left return1"></span>{{ goods.name }}</a>
+{% endblock %}
+{% block main %}
+    <div class="main">
+        {% if images|length %}
+            <div class="carousel slide focus" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    {% for i in images %}
+                        <div class="item {% if loop.first %}active{% endif %}">
+                            <img src="{{ i.path }}" alt="宁波美天诚品进出口有限公司" style="width: 100%;">
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+        {% endif %}
+        <div class="item-value">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 item-price">
+                        <h5>￥{{ goods.price|number_format(2) }}</h5>
+                    </div>
+                    <div class="col-xs-9">
+                        {#<h5 class="item-buy next">100人已购买</h5>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="item-summery">
+            <div class="container">
+                <P>{{ goods.description }}</p>
+            </div>
+        </div>
+
+        <div class="item-spxq">
+            <div class="container text-center">
+                <h5> 商品详情</h5>
+            </div>
+        </div>
+
+        <div class="item-img">
+            <div class="container">
+                <a class="" href="{{ path('goods_introduction', {id: goods.id}) }}">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-list return1"></span>图文详情
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="glyphicon glyphicon-chevron-right next"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="item-info">
+            <div class="container">
+                <div>
+                    <h5><strong>产品规格</strong></h5>
+                    {{ goods.specification|raw }}
+                </div>
+                <!--<div class="sq">-->
+                <!--<a href="#"><p>展开</p></a>-->
+                <!--</div>-->
+            </div>
+        </div>
+
+        <div class="empty"></div>
+        <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+            <form class="container" action="{{ path('cart_add') }}" method="post">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="input-group add">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">购买数量</button>
+                              </span>
+                            <input type="number" class="form-control" name="amount" value="1">
+                            <input type="hidden" name="gid" value="{{ goods.id }}">
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="add">
+                            <input type="submit" class="btn btn-danger" value="加入购物车">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </nav>
+    </div>  <!--main end-->
+{% endblock %}

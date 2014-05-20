@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+{% block nav_title %}
+    <a class="navbar-brand" href="{{ path('goods', {id: goods.id}) }}"><span class="glyphicon glyphicon-chevron-left return1"></span>{{ goods.name }}</a>
+{% endblock %}
+{% block main %}
+    <div class="main">
+        <div class="twxq-info">
+            <div class="container">
+                <h1>{{ goods.name }}</h1>
+                {{ goods.introduction|raw }}
+            </div>
+        </div>
+    </div>  <!--main end-->
+{% endblock %}

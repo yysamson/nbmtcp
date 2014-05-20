@@ -1,0 +1,57 @@
+{% extends "admin/base.twig" %}
+{% block main %}
+    <h1>{{ goods.name }}（{{ goods.available ? '已上架' : '未上架' }}）</h1>
+    <a class="ui green button" href="{{ path('admin_goods_update', {id: goods.id}) }}">修改商品</a>
+    <h2>商品图片</h2>
+    <form method="post" action="{{ path('admin_goods_image_upload') }}" enctype="multipart/form-data">
+        <div class="ui input">
+            <input type="file" name="image" accept="image/*" required>
+        </div>
+        <input type="hidden" name="id" value="{{ id }}"/>
+        <button class="ui secondary button">
+            上传
+        </button>
+    </form>
+    <div class="ui connected six items">
+        {% for i in o(goods, 'goodsimage') %}
+            <div class="item">
+                <div class="image">
+                    <img src="{{ i.path }}">
+                    <a class="star ui corner delete label" href="{{ path('admin_goods_image_delete', {id: i.id}) }}">
+                        <i class="delete icon"></i>
+                    </a>
+                </div>
+                <p style="text-align: center">
+                    {% if goods.image == i.path %}
+                        <span class="ui small green button">标题图片</span>
+                    {% else %}
+                        <a href="{{ path('admin_goods_default_image', {id: goods.id, image_id: i.id}) }}"
+                           class="ui small button">设为标题图片</a>
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="ui pointing secondary goods-info menu">
+        <a class="active red item" data-tab="first">简要说明</a>
+        <a class="blue item" data-tab="second">商品详情</a>
+        <a class="green item" data-tab="third">商品规格</a>
+    </div>
+    <div class="ui active tab segment" data-tab="first">
+        {{ goods.description }}
+    </div>
+    <div class="ui tab segment" data-tab="second">
+        {{ goods.introduction|raw }}
+    </div>
+    <div class="ui tab segment" data-tab="third">
+        {{ goods.specification|raw }}
+    </div>
+    <script>
+        $(document)
+                .ready(function () {
+                    $('.goods-info.menu .item').tab();
+                })
+        ;
+    </script>
+{% endblock %}

@@ -1,0 +1,11 @@
+wechat_pay:
+    path: /wechat/pay/submit
+    defaults: { _controller: '\Controller\WeChat\PayController::payAction'}
+
+wechat_pay_token:
+    path: /wechat/test/token
+    defaults: { _controller: '\Controller\WeChat\PayController::getTokenAction'}
+
+wechat_pay_return:
+    path: /wechat/test/return
+    defaults: { _controller: '\Controller\WeChat\PayController::payReturnAction'}
