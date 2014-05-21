@@ -12,6 +12,7 @@ use Data\PayLogManager;
 use SilexBase\Core\Controller;
 use App\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Httpful\Request as Req;
 
 class PayController extends Controller
 {
@@ -55,7 +56,7 @@ class PayController extends Controller
         $query = $request->query->all();
 
         (new PayLogManager())->add([
-            'type' => '支付反馈',
+            'type'    => '支付反馈',
             'content' => \serialize($query),
             'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
         ]);
@@ -68,7 +69,7 @@ class PayController extends Controller
         $query = $request->query->all();
 
         (new PayLogManager())->add([
-            'type' => '告警',
+            'type'    => '告警',
             'content' => \serialize($query),
             'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
         ]);
@@ -81,11 +82,47 @@ class PayController extends Controller
         $query = $request->query->all();
 
         (new PayLogManager())->add([
-            'type' => '维权',
+            'type'    => '维权',
             'content' => \serialize($query),
             'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
         ]);
 
         return 'success';
+    }
+
+    public function deliverAction(Application $app)
+    {
+        $token = $app['pay']->getToken();
+        $time  = time();
+        $sign  = sha1(sprintf('appid=%s&appkey=%s&deliver_msg=%s&deliver_status=%s&deliver_timestamp=%s&openid=%s&out_trade_no=%s&transid=%s',
+            $app['pay']->getAppId(),
+            $app['pay']->getAppKey(),
+            'ok',
+            '1',
+            $time,
+            'odEAYuD-3gV1JEXM9zO7KkyhoYds',
+            '12',
+            '1218952101201405163384302376'
+        ));
+
+
+        $data = [
+            'appid'             => $app['pay']->getAppId(),
+            'openid'            => 'odEAYuD-3gV1JEXM9zO7KkyhoYds',
+            'transid'           => '1218952101201405163384302376',
+            'out_trade_no'      => '12',
+            'deliver_timestamp' => $time,
+            'deliver_status'    => '1',
+            'deliver_msg'       => 'ok',
+            'app_signature'     => $sign,
+        ];
+
+        $url = 'https://api.weixin.qq.com/pay/delivernotify?access_token=' . $token;
+
+        $response = Req::post($url)
+            ->body(json_encode($data))
+            ->send();
+
+        return $response;
     }
 }

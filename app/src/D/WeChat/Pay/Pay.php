@@ -18,11 +18,23 @@ class Pay
     protected $appId;
     protected $appSecret;
     protected $token;
+    protected $appKey;
 
-    public function __construct($appId, $appSecret)
+    public function __construct($appId, $appSecret, $appKey)
     {
         $this->appId     = $appId;
         $this->appSecret = $appSecret;
+        $this->appKey    = $appKey;
+    }
+
+    public function getAppId()
+    {
+        return $this->appId;
+    }
+
+    public function getAppKey()
+    {
+        return $this->appKey;
     }
 
     public function getToken()

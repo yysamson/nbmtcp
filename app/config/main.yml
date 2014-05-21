@@ -20,3 +20,4 @@ user_providers:
 wechat_pay:
     app_id: wx5e07541dfbc5ee59
     app_secret: e0e0b3b63a4a4d1b05be002a99951a64
+    app_key: EiL8NJmfNGAqC4GhUOUcjJvhVknFtQylWOPeOCLh31bUENvmKbxGpBu1rXVEswk4Xoi0zEX7fhwBqAsFyee31P82e2SIZmIEhrwFKsicCxuqMdBdHcuFzpZZkKnXeqvA

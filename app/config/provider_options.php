@@ -110,7 +110,8 @@ $app['cart'] = $app->share(function () use ($app) {
 $app['pay'] = $app->share(function () use ($app) {
     return new \D\WeChat\Pay\Pay(
         $app['config.main']['wechat_pay']['app_id'],
-        $app['config.main']['wechat_pay']['app_secret']
+        $app['config.main']['wechat_pay']['app_secret'],
+        $app['config.main']['wechat_pay']['app_key']
     );
 });
 

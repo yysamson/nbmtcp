@@ -17,3 +17,7 @@ wechat_pay_warning:
 wechat_pay_complaints:
     path: /wechat/pay/complaints
     defaults: { _controller: '\Controller\WeChat\PayController::complaintsAction'}
+
+wechat_pay_deliver:
+    path: /wechat/pay/deliver
+    defaults: { _controller: '\Controller\WeChat\PayController::deliverAction'}
