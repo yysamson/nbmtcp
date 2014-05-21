@@ -61,4 +61,16 @@ class PayController extends Controller
 
         return 'success';
     }
+
+    public function warningAction(Application $app, Request $request)
+    {
+        $query = $request->query->all();
+
+        (new PayLogManager())->add([
+            'content' => \serialize($query),
+            'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
+        ]);
+
+        return 'success';
+    }
 }

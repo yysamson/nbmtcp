@@ -56,7 +56,7 @@ $app['security.firewalls'] = array(
             }),
     ),
     'customer'  => array(
-        'pattern'     => '(^/customer)|(^/wechat/pay)',
+        'pattern'     => '(^/customer)|(^/wechat/pay/submit)',
         'form'        => array(
             'login_path' => '/login',
             'check_path' => '/customer/login_check'
@@ -86,7 +86,7 @@ $app['security.role_hierarchy'] = array(
 
 $app['security.access_rules'] = array(
     array('^/customer', 'ROLE_USER'),
-    array('^/wechat/pay', 'ROLE_USER'),
+    array('^/wechat/pay/submit', 'ROLE_USER'),
     array('^/admin', 'ROLE_ADMIN'),
 );
 

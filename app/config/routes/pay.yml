@@ -9,3 +9,7 @@ wechat_pay_token:
 wechat_pay_return:
     path: /wechat/test/return
     defaults: { _controller: '\Controller\WeChat\PayController::payReturnAction'}
+
+wechat_pay_warning:
+    path: /wechat/pay/warning
+    defaults: { _controller: '\Controller\WeChat\PayController::warningAction'}
