@@ -19,6 +19,10 @@ class PayLogManager extends Manager
             'type' => 'string'
         ],
         [
+            'name' => 'type',
+            'type' => 'string'
+        ],
+        [
             'name' => 'data',
             'type' => 'string'
         ],

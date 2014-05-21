@@ -55,6 +55,7 @@ class PayController extends Controller
         $query = $request->query->all();
 
         (new PayLogManager())->add([
+            'type' => '支付反馈',
             'content' => \serialize($query),
             'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
         ]);
@@ -67,6 +68,20 @@ class PayController extends Controller
         $query = $request->query->all();
 
         (new PayLogManager())->add([
+            'type' => '告警',
+            'content' => \serialize($query),
+            'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
+        ]);
+
+        return 'success';
+    }
+
+    public function complaintsAction(Application $app, Request $request)
+    {
+        $query = $request->query->all();
+
+        (new PayLogManager())->add([
+            'type' => '维权',
             'content' => \serialize($query),
             'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
         ]);
