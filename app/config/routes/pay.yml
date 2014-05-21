@@ -21,3 +21,7 @@ wechat_pay_complaints:
 wechat_pay_deliver:
     path: /wechat/pay/deliver
     defaults: { _controller: '\Controller\WeChat\PayController::deliverAction'}
+
+wechat_pay_payfeedback:
+    path: /wechat/pay/payfeedback
+    defaults: { _controller: '\Controller\WeChat\PayController::payfeedbackAction'}
