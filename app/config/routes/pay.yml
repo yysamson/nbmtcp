@@ -3,7 +3,7 @@ wechat_pay:
     defaults: { _controller: '\Controller\WeChat\PayController::payAction'}
 
 wechat_pay_notify:
-    path: /wechat/test/notify
+    path: /wechat/pay/notify
     defaults: { _controller: '\Controller\WeChat\PayController::payNotifyAction'}
 
 wechat_pay_warning:

@@ -46,11 +46,13 @@ class PayController extends Controller
         //todo 安全性 检验来源数据
 
         $notify = Notify::createFromRequest($request);
-        $data   = $app['pay']->getPayNotify($notify);
-
+//        print_r($notify);exit;
+        $data = $app['pay']->getPayNotify($notify);
+//print_r($data);exit;
         (new PayLogManager())->add([
                 'type'    => '支付反馈',
                 'content' => \serialize($data),
+                'data'    => $request->query->all(),
             ]
         );
 
@@ -59,7 +61,7 @@ class PayController extends Controller
 
         $order = (new OrdersManager())->get($data['out_trade_no']);
         if ($data['trade_state'] === '0') {
-            $order->status      = OrdersManager::STATUS_PAID;
+            $order->status = OrdersManager::STATUS_PAID;
         }
 
         $order->wechatpayid = $data['transaction_id'];

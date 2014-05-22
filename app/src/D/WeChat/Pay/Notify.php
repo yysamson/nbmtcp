@@ -7,7 +7,6 @@
 
 namespace D\WeChat\Pay;
 
-
 use Symfony\Component\HttpFoundation\Request;
 
 class Notify
