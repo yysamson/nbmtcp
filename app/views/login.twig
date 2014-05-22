@@ -18,12 +18,14 @@
                 {{ error }}
                 <div class=" form-group1">
                     <label for="inputusername3" class=" control-label">用户名</label>
-                    <input type="text" class="form-control " id="inputusername3" placeholder="请输入用户名" name="_username" value="{{ last_username }}">
+                    <input type="text" class="form-control " id="inputusername3" placeholder="请输入用户名" name="_username"
+                           value="{{ last_username }}">
 
                 </div>
                 <div class=" form-group1">
                     <label for="inputPassword3" class="control-label">密码</label>
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="请输入用户名" name="_password" value="">
+                    <input type="password" class="form-control" id="inputPassword3" placeholder="请输入用户名"
+                           name="_password" value="">
 
                 </div>
                 <div class="form-group1">
@@ -33,7 +35,7 @@
                         </div>
                         <div>
                             <div class="col-xs-6">
-                                <a href="a"  class="btn btn-default btn-lg btn-block">注册</a>
+                                <a href="{{ path('register') }}" class="btn btn-default btn-lg btn-block">注册</a>
                             </div>
                         </div>
                     </div>

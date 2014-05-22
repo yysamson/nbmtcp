@@ -4,7 +4,7 @@ $v1 = 'a:16:{s:9:"bank_type";s:4:"2022";s:8:"discount";s:1:"0";s:8:"fee_type";s:
 $data = unserialize($v);
 print_r($data);
 $data = unserialize($v1);
-print_r($data);
+var_dump($data);
 //$a = unserialize('s:352:"<xml><OpenId><![CDATA[odEAYuD-3gV1JEXM9zO7KkyhoYds]]></OpenId>
 //<AppId><![CDATA[wx5e07541dfbc5ee59]]></AppId>
 //<IsSubscribe>1</IsSubscribe>

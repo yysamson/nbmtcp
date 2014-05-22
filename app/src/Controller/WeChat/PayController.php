@@ -7,6 +7,8 @@
 
 namespace Controller\WeChat;
 
+use D\WeChat\Pay\Notify;
+use D\WeChat\Pay\Pay;
 use Data\OrdersManager;
 use Data\PayLogManager;
 use SilexBase\Core\Controller;
@@ -31,8 +33,7 @@ class PayController extends Controller
         }
 
         return $app->render(
-            'cart_order_successful.twig',
-            [
+            'cart_order_successful.twig', [
                 'order' => $order,
                 'user'  => $user,
                 'id'    => $id,
@@ -40,31 +41,30 @@ class PayController extends Controller
         );
     }
 
-    public function getTokenAction(Application $app)
+    public function payNotifyAction(Application $app, Request $request)
     {
-//        $arr = [
-//            'a' => (string)1,
-//            'b' => 'xx'
-//        ];
-//
-//        echo json_encode($arr);
+        //todo 安全性 检验来源数据
 
-        $token = $app['pay']->getToken();
+        $notify = Notify::createFromRequest($request);
+        $data   = $app['pay']->getPayNotify($notify);
 
-        return $token;
-    }
-
-    public function payReturnAction(Application $app, Request $request)
-    {
-        $query = $request->query->all();
-
-        (new PayLogManager())->add(
-            [
+        (new PayLogManager())->add([
                 'type'    => '支付反馈',
-                'content' => \serialize($query),
-                'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
+                'content' => \serialize($data),
             ]
         );
+
+        //todo 记录用户openid
+        //todo 订单表记录微信的订单号
+
+        $order = (new OrdersManager())->get($data['out_trade_no']);
+        if ($data['trade_state'] === '0') {
+            $order->status      = OrdersManager::STATUS_PAID;
+        }
+
+        $order->wechatpayid = $data['transaction_id'];
+
+        \R::store($order);
 
         return 'success';
     }
@@ -73,8 +73,7 @@ class PayController extends Controller
     {
         $query = $request->query->all();
 
-        (new PayLogManager())->add(
-            [
+        (new PayLogManager())->add([
                 'type'    => '告警',
                 'content' => \serialize($query),
                 'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),
@@ -88,8 +87,7 @@ class PayController extends Controller
     {
         $query = $request->query->all();
 
-        (new PayLogManager())->add(
-            [
+        (new PayLogManager())->add([
                 'type'    => '维权',
                 'content' => \serialize($query),
                 'data'    => \serialize($GLOBALS["HTTP_RAW_POST_DATA"]),

@@ -60,9 +60,14 @@ class Pay
         ];
     }
 
-    public function getPayResult(Req $request)
+    /**
+     * 获得支付后的反馈信息
+     *
+     * @param Notify $notify
+     * @return array
+     */
+    public function getPayNotify(Notify $notify)
     {
-        $query = $request->query->all();
         /*[
             'sign_type'       => $request->get('sign_type'),
             'service_version' => $request->get('service_version'),
@@ -88,9 +93,9 @@ class Pay
             'buyer_alias'     => $request->get('buyer_alias'),
         ];*/
 
-        $xml = simplexml_load_string($GLOBALS["HTTP_RAW_POST_DATA"]);
+        $xml = $notify->getRequestXml();
 
-        $post = [
+        $request = [
             'OpenId'       => $xml->OpenId,
             'AppId'        => $xml->AppId,
             'IsSubscribe'  => $xml->IsSubscribe,
@@ -100,10 +105,7 @@ class Pay
             'SignMethod'   => $xml->SignMethod,
         ];
 
-        return [
-            'query' => $query,
-            'post'  => $post,
-        ];
+        return array_merge($request, $notify->getQuery());
     }
 }
  

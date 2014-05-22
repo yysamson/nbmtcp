@@ -38,6 +38,10 @@ class OrdersManager extends Manager
             'name' => 'price',
             'type' => 'float'
         ],
+        [//微信订单编号
+            'name' => 'wechatpayid',
+            'type' => 'string'
+        ],
     ];
 
     protected $many2one = [
