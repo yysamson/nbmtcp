@@ -45,28 +45,35 @@ class PayController extends Controller
     {
         //todo 安全性 检验来源数据
 
-        $notify = Notify::createFromRequest($request);
-//        print_r($notify);exit;
-        $data = $app['pay']->getPayNotify($notify);
-//print_r($data);exit;
+//        $notify = Notify::createFromRequest($request);
+////        print_r($notify);exit;
+//        $data = $app['pay']->getPayNotify($notify);
+////print_r($data);exit;
+//        (new PayLogManager())->add([
+//                'type'    => '支付反馈',
+//                'content' => \serialize($data),
+//                'data'    => \serialize($request->query->all()),
+//            ]
+//        );
+
         (new PayLogManager())->add([
                 'type'    => '支付反馈',
-                'content' => \serialize($data),
-                'data'    => $request->query->all(),
+                'content' => \serialize($request->query->all()),
+                'data'    => $GLOBALS["HTTP_RAW_POST_DATA"],
             ]
         );
 
         //todo 记录用户openid
         //todo 订单表记录微信的订单号
 
-        $order = (new OrdersManager())->get($data['out_trade_no']);
-        if ($data['trade_state'] === '0') {
-            $order->status = OrdersManager::STATUS_PAID;
-        }
-
-        $order->wechatpayid = $data['transaction_id'];
-
-        \R::store($order);
+//        $order = (new OrdersManager())->get($data['out_trade_no']);
+//        if ($data['trade_state'] === '0') {
+//            $order->status = OrdersManager::STATUS_PAID;
+//        }
+//
+//        $order->wechatpayid = $data['transaction_id'];
+//
+//        \R::store($order);
 
         return 'success';
     }
